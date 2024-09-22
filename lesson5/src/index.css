@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-custom1 {
+  --left:0px;
+  background: url('./assets/coke.jpg') var(--left) 0,
+   url('./assets/soda_mokeup_final.png');
+   background-size: auto 100%;
+   background-blend-mode: multiply;
+   mask-image: url('./assets/soda_mokeup_final.png');
+   mask-size: auto 100%;
+   transition: 0.5s;
+   
+  
+}
+.bg-custom1:hover{
+  --left:500px;
+   translate: 100%;
+   transition-timing-function: ease-in-out;
+  
+}
+
+ 
+
+ 

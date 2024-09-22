@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react"
+import {useCallback, useEffect, useRef, useState} from "react"
 import './App.css';
 
 function App() {
@@ -10,6 +10,14 @@ function App() {
    const min =1;
    const max = 20;
    const step =1;
+   
+   const password_selector = useRef(null)
+   
+   const copyToClipboard =useCallback(()=>{
+    password_selector.current?.select()
+    window.navigator.clipboard.writeText(pass);
+
+   },[pass])
 
    
 
@@ -34,12 +42,12 @@ function App() {
    useEffect(()=>{password_generator()},[length,char,num,password_generator]);
   return (
    <div className='h-screen w-screen bg-gray-700 flex justify-center items-center'>
-     <div className='h-1/2 w-3/4 bg-gray-600 flex justify-center items-center'>
+     <div className='h-1/2 w-3/4 bg-gray-600 flex justify-center items-center shadow-lg shadow-black'>
       
-       <div className="h-3/4 w-full flex flex-col justify-center gap-5 items-center">
-            <div className="h-1/4 w-3/4 bg-white flex justify-between items-center">
-                    <div className='p-2 h-full w-4/5 '><input  placeholder="Your generated Password" className='outline-none h-full w-full text-2xl font-thin text-black' type="text" readOnly value={pass}/></div>
-                    <div className='h-full w-1/5 bg-blue-500 flex justify-center items-center'><button className='text-white text-4xl font-medium '>Copy</button></div>
+       <div className="h-3/4 w-full flex flex-col justify-center gap-5 items-center ">
+            <div className="h-1/4 w-3/4 bg-white flex justify-between items-center shadow-md shadow-gray-700">
+                    <div className='p-2 h-full w-4/5 '><input  placeholder="Your generated Password"  ref = {password_selector} className='outline-none h-full w-full text-2xl font-thin text-black' type="text" readOnly value={pass}/></div>
+                    <div className='h-full w-1/5 bg-blue-500 hover:bg-blue-600 flex justify-center items-center'><button onClick={copyToClipboard} className='text-white text-4xl font-medium '>Copy</button></div>
             </div>
             <div className="h-1/4 w-3/4  flex items-center gap-10 ">
               <div className=" w-1/4" ><input className="w-full" type="range" min={min} max={max} step={step} value={length} onChange={(e)=>{setLength(e.target.value)}}/> <h2 className="text-white text-lg">{length}</h2></div>
